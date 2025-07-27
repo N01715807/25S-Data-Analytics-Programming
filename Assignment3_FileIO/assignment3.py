@@ -65,7 +65,7 @@ with open ("top_students.txt","w") as output_file:
 
     updated_lines = []
     for name, email, grade in student_data:
-        if grade < 50:
+        if grade < 60:
             line_string = f"{name},{email},{grade}"
             update_line = re.sub(r"\d+", "Fail", line_string)
         else:
