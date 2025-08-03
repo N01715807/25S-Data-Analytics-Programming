@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analysis Summary</title>
+</head>
+<body>
+    <h2>Data Cleaning Summary: {{ filename }}</h2>
+
+    <p><strong>Original Shape:</strong> {{ summary.original_shape }}</p>
+    <p><strong>Cleaned Shape:</strong> {{ summary.cleaned_shape }}</p>
+    <p><strong>Duplicates Removed:</strong> {{ summary.duplicates_removed }}</p>
+
+    <h3>Nulls Before Cleaning:</h3>
+    <ul>
+      {% for col, null in summary.nulls_before.items() %}
+        <li>{{ col }}: {{ null }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Nulls After Cleaning:</h3>
+    <ul>
+      {% for col, null in summary.nulls_after.items() %}
+        <li>{{ col }}: {{ null }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Descriptive Statistics:</h3>
+    {{ summary.describe | safe }}
+
+    <br><br>
+    <a href="{{ url_for('visualize', filename=filename) }}">→ Go to Visualizations</a>
+</body>
+</html>

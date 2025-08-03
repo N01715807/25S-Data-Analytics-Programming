@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Visualizations</title>
+</head>
+<body>
+    <h1>Data Visualizations</h1>
+
+    {% for chart in charts %}
+        <div>
+            <h3>{{ chart.split('/')[-1].replace('_', ' ').replace('.png', '').title() }}</h3>
+            <img src="{{ url_for('static', filename=chart) }}" width="600">
+            <p><strong>Insight:</strong>
+                {% if 'family_history_vs_seek_help_bar' in chart %}
+                    Employees with a family history of mental illness are more likely to seek mental health support.
+                {% elif 'family_history_seek_help_percentage' in chart %}
+                    The willingness to seek help is significantly higher among those with a family history of mental illness.
+                {% elif 'benefits_pie' in chart %}
+                    Most employees say their employer offers mental health benefits, but some are unsure or lack access.
+                {% elif 'benefits_vs_seek_help_bar' in chart %}
+                    Offering mental health benefits increases the likelihood of employees seeking help.
+                {% elif 'work_interfere_vs_treatment_bar' in chart %}
+                    Employees whose work is often affected by mental health issues are more likely to have received treatment.
+                {% elif 'correlation_heatmap' in chart %}
+                    Work interference and treatment have moderate correlation; age is less influential.
+                {% elif 'remote_work_distribution_pie' in chart %}
+                    Most employees can work remotely, showing flexible work is common in tech.
+                {% elif 'remote_work_vs_consequence_bar' in chart %}
+                    Those unable to work remotely report more mental health-related job consequences.
+                {% elif 'age_distribution_hist' in chart %}
+                    The workforce is concentrated between ages 20–40, typical for tech industry.
+                {% elif 'age_boxplot_by_mh_view' in chart %}
+                    Those who value mental health equally to physical health span a wider age range.
+                {% elif 'gender_distribution_pie' in chart %}
+                    Slightly more males than females in the dataset, consistent with tech industry trends.
+                {% elif 'gender_vs_seek_help_bar' in chart %}
+                    Female employees are more likely to seek mental health help than male employees.
+                {% else %}
+                    No insight available.
+                {% endif %}
+            </p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
+
